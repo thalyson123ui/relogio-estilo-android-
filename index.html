@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
+    rel="stylesheet"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css">
+    <title>relogio estilo android</title>
+</head>
+<body>
+    <div class="center">
+        <div class="clock">
+          <div class="seconds"></div>
+          <div class="minutes"></div>
+          <div class="hours"></div>
+          <div class="date"></div>
+        </div>
+      </div>
+
+      <script>
+        let clock = document.querySelector(".clock");
+        for (var i = 0; i < 360; i += 30) {
+          let spike = document.createElement("span");
+          spike.className = "spike";
+          spike.style.transform = `rotate(${i}deg) translateY(-100px)`;
+          clock.appendChild(spike);
+        }
+        const interval = setInterval(() => {
+          var date = new Date();
+          let secondsPoint = document.querySelector(".seconds");
+          let minutesPoint = document.querySelector(".minutes");
+          let hoursPoint = document.querySelector(".hours");
+          let datePoint = document.querySelector(".date");
+  
+          let secPosition = date.getSeconds() * 6;
+          let minPosition = date.getMinutes() * 6;
+          let hourPosition = date.getHours() * 30;
+  
+          let dayArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          datePoint.innerHTML = dayArray[date.getDay()] + " " + date.getDate();
+  
+          if (secPosition == 0) {
+            secondsPoint.style.transition = "none";
+            datePoint.style.transition = "none";
+          } else {
+            secondsPoint.style.transition = "0.25s";
+            datePoint.style.transition = "0.25s";
+          }
+          if (minPosition == 0) {
+            minutesPoint.style.transition = "none";
+          } else {
+            minutesPoint.style.transition = "0.25s";
+          }
+          secondsPoint.style.transform = `rotate(${secPosition}deg) translateY(-84px)`;
+          minutesPoint.style.transform = `rotate(${minPosition - 180}deg) `;
+          hoursPoint.style.transform = `rotate(${hourPosition - 180}deg) `;
+          datePoint.style.transform = `rotate(${
+            secPosition - 180
+          }deg) translateY(-84px)`;
+        }, 1000);
+      </script>
+</body>
+</html>
